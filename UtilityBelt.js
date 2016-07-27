@@ -1,22 +1,28 @@
 /**
  * Created by rbmenke on 7/25/15.
  *
- * In all of my javascript files I prefer to keep a namespace (object literal) at the top of the document to house all methods I think of as static.
- * I then include all constructor functions (classes) that are pertinent to a particular module underneath the namespaced code so that the class(es)
- * can be used globally.
- *
- *
- * The purpose of the UtilityBelt.js (yes, I'm a fan of batman) file is to house functions that are generic enough to be reused over and over in
- * a variety of situations. At the top of the document I include a namespace called UtilityBelt that house functions I like to think of as static.
- * After the namespace "UtilityBelt" ends I have a class called "GenericTooltip" that allows me to easily and quickly build custom tooltips for
- * virtually any purpose.
- *
- *
- * UtilityBelt.js is also unique amongst files in my projects because it is always my first linked javascript file (after jQuery and API links).
- * I do this because all additions to a built-in javascript object's prototype (for example, Array.prototype.methodName) are included at the bottom
- * of this file so that those methods can be used for any Array, Date, Function, etc. (Note that when using jQuery the object "Object" cannot be
- * extended. It will essentially break jQuery)
- *
+ * The MIT License (MIT)
+
+ Copyright (c) 2016 Robert Menke
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+
  *
  */
 UtilityBelt = {
@@ -231,42 +237,6 @@ UtilityBelt = {
         }
     },
 
-    /**
-     * This function simply adds classes to the sidebar and main containerForData so that the sidebar will collapse
-     * and give the user more screen real estate
-     * @param sidebar - the Element object associated with the sidebar
-     * @param button - the Element object associated with the button
-     * @param isCollapse - boolean are we expanding or collapsing?
-     */
-
-    collapseSidebar: function(sidebar, button, isCollapse){
-
-        var $container = $("#containerForData");
-        var $toolbar = $(".toolbarOptions");
-        if(isCollapse){
-            $(sidebar).addClass('smallSidebar');
-            $container.addClass('wideContainer');
-            //$("#collapseLeft").animate({left: '1px'},{duration: 800, queue: false});
-            $(".linkText").hide();
-
-        } else{
-
-            $(sidebar).removeClass('smallSidebar');
-            $container.removeClass('wideContainer');
-
-            setTimeout(function(){
-                $(".linkText").show();
-            }, 500);
-        }
-        button.classList.toggle('bt-menu-open');
-
-        if($toolbar.length){
-            setTimeout(function(){
-                $toolbar.width($(".workoutWeek").width());
-            }, 500);
-        }
-
-    },
 
     findSibling: function(node, searchFor){
 
@@ -733,28 +703,6 @@ UtilityBelt = {
     checkValidUrl: function(text){
 
         return /http[s]{0,1}:\/\/[a-z\d]*\.[a-z\d]*\.{0,1}[a-z\d]*/gi.test(text);
-
-    },
-
-    checkIfUrlExists : function (url, callback){
-
-        $.ajax({
-            async: true,
-            url : window.ForteRoot + 'php/checkUrlValidity.php',
-            data: JSON.stringify({'url' : url}),
-            type: "POST",
-            datatype: 'json',
-            success: function(){
-
-            },
-            error: function() {
-
-            }
-        }).done(function(json){
-
-            json = JSON.parse(json);
-            callback(json);
-        });
 
     },
 
@@ -1338,21 +1286,6 @@ UtilityBelt = {
         $markup.css('top', obj.top + 'px');
         $markup.find('i').on('click', function(){$markup.remove();});
         setTimeout(function(){$markup.remove();}, obj.duration);
-    },
-
-    makeImageTag : function(src /* extra classes */){
-
-        var extraClasses = [].slice.call(arguments).splice(1).reduce(function(a, b){
-            return a + ' ' + b;
-        }, '') || '';
-
-        if(src.trim().length === 0){
-            return '<i class = "material-icons '+ extraClasses +'">account_circle</i>';
-        } else if(UtilityBelt.checkValidUrl(src)){
-            return '<img src = "' + src + '" class = "' + extraClasses + '" />';
-        } else{
-            return '<img src = "' + window.ForteRoot + src.split("").splice(1).join("") + '" class = "' + extraClasses + '" />';
-        }
     }
 };
 
