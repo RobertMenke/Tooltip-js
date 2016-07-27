@@ -1,6 +1,6 @@
-# Dillinger
+# Tooltip
 
-This repo contains a few useful files
+This repo contains a few useful files. They can all act independently of one another I just put them here with an open source license so I could use them whenever I wanted.
 
 
   - Tooltip.js - a very flexible tooltip class
