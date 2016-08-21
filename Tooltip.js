@@ -58,6 +58,14 @@ function Tooltip(element, container, jqObject){
     this.jqHeight       = 0;
     this.jqWidth        = 0;
 
+    /**
+     * unique timestamp for click listeners so that many can fire at once
+     *
+     * @type {string}
+     * @private
+     */
+    this._unique        = "";
+
     this.placeTooltip();
 }
 
@@ -72,6 +80,7 @@ Tooltip.prototype.placeTooltip = function(){
 
     this.jqHeight = this.jqObject.outerHeight();
     this.jqWidth  = this.jqObject.outerWidth();
+
     //First, position the tooltip to be exactly centered over the element
     this.jqObject.css('top', this.dimension.top - (this.jqObject.outerHeight() / 2) + (this.elRect.height / 2))
                  .css('left', this.dimension.left - (this.jqObject.outerWidth() / 2) + (this.elRect.width / 2));
@@ -98,6 +107,25 @@ Tooltip.prototype.autoPlace = function(leftCushion, topCushion){
     this.jqObject.css('left' , h_operator   + ((this.elWidth / 2) + (this.jqWidth / 2) - leftCushion) + 'px');
     this.jqObject.css('top'  , v_operator   + ((this.elHeight / 2) + (this.jqHeight / 2) + topCushion) + 'px');
 
+    this.jqObject.addClass(autoOffsets.horizontal).addClass(autoOffsets.vertical);
+
+    return this;
+};
+
+/**
+ * Autoplaces the tooltip to the left or right
+ * @param cushion
+ * @returns {Tooltip}
+ */
+Tooltip.prototype.autoPlaceHorizontally = function(cushion){
+    var autoOffsets = this.determineOffsetFromElement();
+
+    cushion = cushion || 0;
+    //Next, based on the classes, position the tooltip
+    var h_operator          = autoOffsets.horizontal === 'GenericTooltipRight' ? '-=' : '+=';
+    cushion                 = autoOffsets.horizontal === 'GenericTooltipRight' ? cushion : cushion * -1;
+
+    this.jqObject.css('left' , h_operator   + ((this.elWidth / 2) + (this.jqWidth / 2) - cushion) + 'px');
     this.jqObject.addClass(autoOffsets.horizontal).addClass(autoOffsets.vertical);
 
     return this;
@@ -208,6 +236,46 @@ Tooltip.prototype.destroy = function(){
 };
 
 /**
+ *
+ * @returns {Tooltip}
+ */
+Tooltip.prototype.removeListener = function(){
+
+    var obj = this;
+    setTimeout(function(){
+        $("html").on('click.tooltip', function(){
+            obj.jqObject.remove();
+            $("html").off('click.tooltip');
+        })
+    }, 50);
+    return this;
+};
+
+/**
+ *
+ * @param {Event} event
+ * @param {Function} func
+ */
+Tooltip.prototype.setClickCallback = function(event, func){
+
+    event.stopPropagation();
+    this._unique = 'click.' + new Date().getTime();
+
+    $("html").on(this._unique, function(e){
+        func.call(this, e.target, this.jqObject);
+    }.bind(this));
+};
+
+/**
+ *
+ * @returns {Tooltip}
+ */
+Tooltip.prototype.offCallback = function(){
+    $("html").off(this._unique);
+    return this;
+};
+
+/**
  * Gets the viewport dimensions of the element offset by the container's viewport dimensions
  *
  * @returns {{left: number, top: number, right: number, bottom: number, width: Number, height: Number}}
@@ -216,8 +284,8 @@ Tooltip.prototype.jqViewportDimension = function(){
 
     var jqObject = this.jqObject[0].getBoundingClientRect();
     var contRect = this.contRect;
-    var left     = jqObject.left     - contRect.left - this.container.scrollLeft;
-    var top      = jqObject.top      - contRect.top  - this.container.scrollTop;
+    var left     = jqObject.left     - contRect.left + this.container.scrollLeft;
+    var top      = jqObject.top      - contRect.top  + this.container.scrollTop;
     var right    = jqObject.right    - contRect.right;
     var bottom   = jqObject.bottom   - contRect.bottom;
 
@@ -242,8 +310,8 @@ Tooltip.prototype.calculateViewportPosition = function(){
     var domRect  = this.elRect;
     var contRect = this.contRect;
 
-    var left     = domRect.left     - contRect.left - this.container.scrollLeft;
-    var top      = domRect.top      - contRect.top  - this.container.scrollTop;
+    var left     = domRect.left     - contRect.left + this.container.scrollLeft;
+    var top      = domRect.top      - contRect.top  + this.container.scrollTop;
     var right    = domRect.right    - contRect.right;
     var bottom   = domRect.bottom   - contRect.bottom;
 
