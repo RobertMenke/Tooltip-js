@@ -24,8 +24,6 @@
  SOFTWARE.
 
  */
-
-
 /**
  * This is a simple tooltip class for determining the placement of a tooltip within a container.
  * By calling the constructor with the new operator, the developer will get a tooltip whose center
@@ -123,11 +121,27 @@ Tooltip.prototype.autoPlaceHorizontally = function(cushion){
     cushion = cushion || 0;
     //Next, based on the classes, position the tooltip
     var h_operator          = autoOffsets.horizontal === 'GenericTooltipRight' ? '-=' : '+=';
-    cushion                 = autoOffsets.horizontal === 'GenericTooltipRight' ? cushion : cushion * -1;
 
-    this.jqObject.css('left' , h_operator   + ((this.elWidth / 2) + (this.jqWidth / 2) - cushion) + 'px');
+    this.jqObject.css('left' , h_operator   + ((this.elWidth / 2) + (this.jqWidth / 2) + cushion) + 'px');
     this.jqObject.addClass(autoOffsets.horizontal).addClass(autoOffsets.vertical);
 
+    return this;
+};
+
+/**
+ * Autoplaces the tooltip above or below
+ *
+ * @param cushion
+ * @returns {Tooltip}
+ */
+Tooltip.prototype.autoPlaceVertically = function(cushion){
+
+    var autoOffsets = this.determineOffsetFromElement();
+    cushion  = cushion  || 0;
+
+    var v_operator          = autoOffsets.vertical   === 'GenericTooltipAbove' ? '-=' : '+=';
+    this.jqObject.css('top'  , v_operator   + ((this.elHeight / 2) + (this.jqHeight / 2) + cushion) + 'px');
+    this.jqObject.addClass(autoOffsets.vertical);
     return this;
 };
 
