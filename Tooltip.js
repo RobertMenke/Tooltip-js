@@ -24,6 +24,7 @@
  SOFTWARE.
 
  */
+
 /**
  * This is a simple tooltip class for determining the placement of a tooltip within a container.
  * By calling the constructor with the new operator, the developer will get a tooltip whose center
@@ -236,6 +237,64 @@ Tooltip.prototype.alignRight = function(cushion){
     var operator = this.jqDimension.right > this.dimension.right ? '-=' : '+=';
     this.jqObject.css('left', operator + (Math.abs((this.jqDimension.right - this.dimension.right)) + cushion) + 'px');
     this.jqObject.addClass('GenericTooltipAlignRight');
+    return this;
+};
+
+/**
+ * This is a variadic function that accepts the following string arguments:
+ * "top", "bottom", "left", "right". The difference with this function is
+ * that it places the markup inside of this.element rather than on the outside
+ * like most tooltips.
+ *
+ * @returns {Tooltip}
+ */
+Tooltip.prototype.inside = function(){
+
+    if(arguments.length){
+        const args = Array.prototype.slice.call(arguments);
+        args.forEach((arg) => {
+           switch (arg){
+               case "top":
+                   this._insideTop();
+                   break;
+               case "bottom":
+                   this._insideBottom();
+                   break;
+               case "left":
+                   this.alignLeft();
+                   break;
+               case "right":
+                   this.alignRight();
+                   break;
+               default:
+                   break;
+           }
+        });
+    }
+    return this;
+};
+
+/**
+ * Places the tooltip's top property on an equal plane to the element's top
+ * value (in an absolute sense)
+ *
+ * @returns {Tooltip}
+ * @private
+ */
+Tooltip.prototype._insideTop = function(){
+
+    this.jqObject.css('top', '-=' + (this.elHeight / 4));
+    return this;
+};
+
+/**
+ * Places the tooltip on the bottom of the element
+ *
+ * @returns {Tooltip}
+ * @private
+ */
+Tooltip.prototype._insideBottom = function(){
+    this.jqObject.css('top', '+=' + (this.elHeight / 2));
     return this;
 };
 
