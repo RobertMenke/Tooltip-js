@@ -124,7 +124,7 @@ Tooltip.prototype.autoPlaceHorizontally = function(cushion){
     var h_operator          = autoOffsets.horizontal === 'GenericTooltipRight' ? '-=' : '+=';
 
     this.jqObject.css('left' , h_operator   + ((this.elWidth / 2) + (this.jqWidth / 2) + cushion) + 'px');
-    this.jqObject.addClass(autoOffsets.horizontal).addClass(autoOffsets.vertical);
+    this.jqObject.addClass(autoOffsets.horizontal);
 
     return this;
 };
