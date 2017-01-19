@@ -1,0 +1,107 @@
+.Tooltip {
+  position: absolute;
+  display: block;
+  background-color: #fff;
+  /*#B0BEC5;*/
+  color: #000;
+  border: 1px solid #81C784;
+  height: auto;
+  width: auto;
+  padding: 10px;
+  overflow: visible;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 3px 0 rgba(50, 50, 50, 0.4);
+  -moz-box-shadow: 0 0 3px 0 rgba(50, 50, 50, 0.4);
+  box-shadow: 0 0 3px 0 rgba(50, 50, 50, 0.4);
+  -webkit-animation: fadeDown-alec 0.2s cubic-bezier(0.2, 0.7, 0.9, 0.4); }
+
+.Tooltip:after {
+  position: absolute;
+  display: block;
+  content: ""; }
+
+.Tooltip.TooltipAbove:after {
+  bottom: -7px;
+  height: 14px;
+  width: 14px;
+  left: calc(50% - 7px);
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  background: #fff;
+  border-right: 1px solid #81C784;
+  border-bottom: 1px solid #E57373;
+  -webkit-box-shadow: 2px 2px 2px 0 rgba(50, 50, 50, 0.3);
+  -moz-box-shadow: 2px 2px 2px 0 rgba(50, 50, 50, 0.3);
+  box-shadow: 2px 2px 2px 0 rgba(50, 50, 50, 0.3); }
+
+.Tooltip.TooltipBelow:after {
+  top: -7px;
+  height: 14px;
+  width: 14px;
+  left: calc(50% - 7px);
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  border-left: 1px solid #81C784;
+  border-top: 1px solid #E57373;
+  background: #fff;
+  -webkit-box-shadow: -1px -1px 2px -1px rgba(50, 50, 50, 0.4);
+  -moz-box-shadow: -1px -1px 2px -1px rgba(50, 50, 50, 0.4);
+  box-shadow: -1px -1px 2px -1px rgba(50, 50, 50, 0.4); }
+
+.Tooltip.TooltipLeft:after {
+  right: -7px;
+  height: 14px;
+  width: 14px;
+  top: calc(50% - 7px);
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  border-right: 1px solid #81C784;
+  border-top: 1px solid #81C784;
+  background: #fff;
+  -webkit-box-shadow: 2px -1px 2px -2px rgba(50, 50, 50, 0.4);
+  -moz-box-shadow: 2px -1px 2px -2px rgba(50, 50, 50, 0.4);
+  box-shadow: 2px -1px 2px -2px rgba(50, 50, 50, 0.4); }
+
+.Tooltip.TooltipRight:after {
+  left: -7px;
+  height: 14px;
+  width: 14px;
+  top: calc(50% - 7px);
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  border-left: 1px solid #81C784;
+  border-bottom: 1px solid #81C784;
+  background: #fff;
+  -webkit-box-shadow: -2px -1px 2px -2px rgba(50, 50, 50, 0.4);
+  -moz-box-shadow: -2px -1px 2px -2px rgba(50, 50, 50, 0.4);
+  box-shadow: -2px -1px 2px -2px rgba(50, 50, 50, 0.4); }
+
+.Tooltip.TooltipAlignRight:after {
+  right: 30px; }
+
+.Tooltip.TooltipAlignLeft:after {
+  left: 30px; }
+
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none; } }
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none; } }
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown; }
+
+/*# sourceMappingURL=Tooltip.css.map */

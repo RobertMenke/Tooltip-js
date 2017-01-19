@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <title>Title</title>
+    <link href = "../dist/css/Tooltip.css" rel = "stylesheet" type = "text/css">
+    <style>
+        body{
+            text-align: center;
+        }
+        
+        #wrapper {
+            position : relative;
+            height   : 700px;
+            width    : 1000px;
+        }
+        
+        .top {
+            position : absolute;
+            top      : 20px;
+        }
+        
+        .bottom {
+            position : absolute;
+            bottom   : 20px;
+        }
+        
+        .right{
+            right: 0;
+        }
+        
+        .left{
+            left: 0;
+        }
+        
+        .hover {
+            width       : 200px;
+            height      : 100px;
+            text-align  : center;
+            line-height : 100px;
+            color       : #FFFFFF;
+            background  : #3F51B5;
+        }
+    </style>
+</head>
+<body>
+<div id = "wrapper">
+    <div class = "hover top left"></div>
+    <div class = "hover top right"></div>
+    <div class = "hover bottom left"></div>
+    <div class = "hover bottom right"></div>
+</div>
+
+<script src = "js/main/autoplace.js" type = "text/javascript"></script>
+</body>
+</html>
