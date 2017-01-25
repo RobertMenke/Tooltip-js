@@ -166,7 +166,7 @@ Tooltip.prototype.autoPlace = function (leftCushion, topCushion) {
   this.$tooltip.css('left', h_operator + (this.elWidth / 2 + this.jqWidth / 2 - leftCushion) + 'px');
   this.$tooltip.css('top', v_operator + (this.elHeight / 2 + this.jqHeight / 2 + topCushion) + 'px');
 
-  this.$tooltip.addClass(autoOffsets.horizontal).addClass(autoOffsets.vertical);
+  this.$tooltip.addClass(autoOffsets.horizontal + " " + autoOffsets.vertical + " autoplace");
 
   return this;
 };

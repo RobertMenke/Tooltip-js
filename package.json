@@ -13,7 +13,7 @@
     "mustache": "^2.3.0"
   },
   "scripts": {
-    "build": "babel --presets es2015 lib -d dist",
+    "build": "babel --presets es2015 lib --out-file dist/Tooltip.js",
     "start": "webpack --progress --watch"
   },
   "main" : "dist/Tooltip.js"

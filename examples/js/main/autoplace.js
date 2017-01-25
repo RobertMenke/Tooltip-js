@@ -65,17 +65,82 @@
 	    var container = document.getElementById('wrapper');
 	    var tooltip = void 0;
 
-	    (0, _jquery2.default)(".hover").on('mouseenter', function () {
+	    (0, _jquery2.default)(".hover").on('mouseenter', /**@this {HTMLElement}*/function () {
 	        tooltip = new _Tooltip2.default(this, container, (0, _jquery2.default)((0, _tooltip2.default)({
-	            message: "I was created using the autoplace function"
+	            message: determineMessage(this)
 	        })));
 	        //10/10 offset to make the stick to the button
-	        tooltip.autoPlace(10, 10);
+	        determinePlacement(this, tooltip);
 	    }).on('mouseleave', function () {
 	        return tooltip.destroy();
 	    });
+
+	    (0, _jquery2.default)(container).height((0, _jquery2.default)(document).height());
 	});
+
+	/**
+	 * Determine the message to display in the tooltip
+	 *
+	 * @param stick_to
+	 * @returns {*}
+	 */
+
 	//Mustache template
+	function determineMessage(stick_to) {
+	    var left = stick_to.classList.contains('js-left');
+	    var right = stick_to.classList.contains('js-right');
+	    var above = stick_to.classList.contains('js-above');
+	    var below = stick_to.classList.contains('js-below');
+	    var align_left = stick_to.classList.contains('js-alignleft');
+	    var align_right = stick_to.classList.contains('js-alignright');
+
+	    if (left) {
+	        return "I was created using the left() method";
+	    } else if (right) {
+	        return "I was created using the right() method";
+	    } else if (above) {
+	        return "I was created using the above() method";
+	    } else if (below) {
+	        return "I was created using the below() method";
+	    } else if (align_left) {
+	        return "I was created using tooltip.alignLeft().above()";
+	    } else if (align_right) {
+	        return "I was created using tooltip.alignRight().below()";
+	    } else {
+	        return "I was created using the autoPlace() method";
+	    }
+	}
+
+	/**
+	 * Determine the placement function to use for the tooltip
+	 *
+	 * @param {HTMLElement} stick_to
+	 * @param {Tooltip} tooltip
+	 */
+	function determinePlacement(stick_to, tooltip) {
+	    var left = stick_to.classList.contains('js-left');
+	    var right = stick_to.classList.contains('js-right');
+	    var above = stick_to.classList.contains('js-above');
+	    var below = stick_to.classList.contains('js-below');
+	    var align_left = stick_to.classList.contains('js-alignleft');
+	    var align_right = stick_to.classList.contains('js-alignright');
+
+	    if (left) {
+	        tooltip.left(8);
+	    } else if (right) {
+	        tooltip.right(8);
+	    } else if (above) {
+	        tooltip.above(8);
+	    } else if (below) {
+	        tooltip.below(8);
+	    } else if (align_left) {
+	        tooltip.alignLeft().above(8);
+	    } else if (align_right) {
+	        tooltip.alignRight().below(8);
+	    } else {
+	        tooltip.autoPlace(50, 10);
+	    }
+	}
 
 /***/ },
 /* 1 */
@@ -10066,7 +10131,7 @@
 	  this.$tooltip.css('left', h_operator + (this.elWidth / 2 + this.jqWidth / 2 - leftCushion) + 'px');
 	  this.$tooltip.css('top', v_operator + (this.elHeight / 2 + this.jqHeight / 2 + topCushion) + 'px');
 
-	  this.$tooltip.addClass(autoOffsets.horizontal).addClass(autoOffsets.vertical);
+	  this.$tooltip.addClass(autoOffsets.horizontal + " " + autoOffsets.vertical + " autoplace");
 
 	  return this;
 	};

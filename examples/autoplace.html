@@ -3,7 +3,7 @@
 <head>
     <meta charset = "UTF-8">
     <title>Title</title>
-    <link href = "../dist/css/Tooltip.css" rel = "stylesheet" type = "text/css">
+    <link href = "../dist/Tooltip.css" rel = "stylesheet" type = "text/css">
     <style>
         body{
             text-align: center;
@@ -12,7 +12,7 @@
         #wrapper {
             position : relative;
             height   : 700px;
-            width    : 1000px;
+            width    : 100%;
         }
         
         .top {
@@ -41,14 +41,49 @@
             color       : #FFFFFF;
             background  : #3F51B5;
         }
+        
+        .v-center{
+            position : absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .h-center{
+            position : absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .center-right.h-center{
+            left: 70%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .center-left.h-center{
+            left: 30%;
+            transform: translate(-50%, -50%);
+        }
     </style>
 </head>
 <body>
 <div id = "wrapper">
-    <div class = "hover top left"></div>
-    <div class = "hover top right"></div>
-    <div class = "hover bottom left"></div>
-    <div class = "hover bottom right"></div>
+    <!--Autoplace divs-->
+    <div class = "hover top left"><span>Autoplace Tooltip</span></div>
+    <div class = "hover top right"><span>Autoplace Tooltip</span></div>
+    <div class = "hover bottom left"><span>Autoplace Tooltip</span></div>
+    <div class = "hover bottom right"><span>Autoplace Tooltip</span></div>
+    <!--Above-->
+    <div class = "hover top v-center js-below"><span>Below Tooltip</span></div>
+    <!--Below-->
+    <div class = "hover bottom v-center js-above"><span>Above Tooltip</span></div>
+    <!--Left-->
+    <div class = "hover left h-center js-right"><span>Right Tooltip</span></div>
+    <!--Right-->
+    <div class = "hover right h-center js-left"><span>Left Tooltip</span></div>
+    <!--Align Right-->
+    <div class = "hover center-right h-center js-alignright"><span>Align-Right Tooltip</span></div>
+    <!--Align Left-->
+    <div class = "hover center-left h-center js-alignleft"><span>Align-Left Tooltip</span></div>
 </div>
 
 <script src = "js/main/autoplace.js" type = "text/javascript"></script>
