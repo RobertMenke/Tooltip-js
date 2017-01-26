@@ -1,6 +1,6 @@
 {
   "name" : "rm-tooltip",
-  "version" : "1.0.2",
+  "version" : "1.0.3",
   "description": "This is a tooltip library designed to perfectly position tooltips inside of elements with relative or absolute positioning.",
   "devDependencies": {
     "babel-cli": "^6.18.0",

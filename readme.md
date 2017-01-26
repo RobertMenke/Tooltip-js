@@ -65,9 +65,10 @@ The library was written using ES6 and was transpiled with Babel. My intention is
 module-bundling library.
 
 ```javascript
-import Tooltip from "tooltip-js";
+import Tooltip from "rm-tooltip";
 ```
 
+If you're not viewing this on github, here's a link! https://github.com/RobertMenke/Tooltip-js
 
 #TODO
 
