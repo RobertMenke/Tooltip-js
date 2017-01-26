@@ -1,6 +1,7 @@
 {
   "name" : "rm-tooltip",
-  "version" : "1.0.0",
+  "version" : "1.0.2",
+  "description": "This is a tooltip library designed to perfectly position tooltips inside of elements with relative or absolute positioning.",
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-loader": "^6.2.10",
@@ -8,11 +9,11 @@
     "chokidar": "^1.6.1",
     "mustache-loader": "^0.4.1",
     "webpack": "^1.14.0",
-    "babel": "^6.5.2"
+    "babel": "^6.5.2",
+    "mustache": "^2.3.0"
   },
   "dependencies": {
-    "jquery": "^3.1.1",
-    "mustache": "^2.3.0"
+    "jquery": "^3.1.1"
   },
   "scripts": {
     "build": "babel --presets es2015 lib --out-file dist/Tooltip.js",

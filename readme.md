@@ -18,14 +18,14 @@ const tooltip = new Tooltip(stick_to, container, jquery_tooltip);
 
 The tooltip constructor accepts 3 arguments
 
-- @param {HTMLElement} stick_to         - the element you want to append the tooltip to
-- @param {HTMLElement} parentContainer  - the container the tooltip will get appended to. This is useful if you want your tooltip to scroll with the rest of the container
-- @param {jQuery}      jqueryTooltip    - a jquery object with all of your tooltip content
+- ```@param {HTMLElement} stick_to```          - the element you want to append the tooltip to
+- ```@param {HTMLElement} container```         - the container the tooltip will get appended to. This is useful if you want your tooltip to scroll with the rest of the container
+- ```@param {jQuery}      jquery_tooltip```    - a jquery object with all of your tooltip content
 
 #Basic Cases:
 
 - ```.above(cushion)``` - place the tooltip above the element
-- ```below(cushion)``` - place the tooltip below the element
+- ```.below(cushion)``` - place the tooltip below the element
 - ```.left(cushion)``` - Places the tooltip to the left of the element
 - ```.right(cushion)``` - Places the tooltip to the right of the element
 
