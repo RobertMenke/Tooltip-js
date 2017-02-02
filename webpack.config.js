@@ -6,15 +6,16 @@ const path = require("path");
 
 module.exports = {
     entry : {
-        // Tooltip     : './lib/js/Tooltip.js',
-        autoplace   : './examples/js/autoplace/autoplace.js'
+        Tooltip     : './lib/js/Tooltip.js',
+        // autoplace   : './examples/js/autoplace/autoplace.js'
     },
     // devtool : '#inline-source-map',
     cache : true,
     output : {
-        // path        : './dist/js',
-        path        : './examples/js/main',
-        filename    : '[name].js'
+        path        : './dist/',
+        // path        : './examples/js/main',
+        filename    : '[name].js',
+        libraryTarget : "umd"
     },
     module : {
         loaders : [
@@ -32,11 +33,14 @@ module.exports = {
             }
         ]
     },
+    externals : {
+        "jquery" : "jquery"
+    },
     plugins : [
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false
-        //     }
-        // })
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })
     ]
 };
