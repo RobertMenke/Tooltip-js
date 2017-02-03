@@ -1,6 +1,11 @@
 {
   "name": "rm-tooltip",
   "version": "1.0.5",
+  "keywords": ["tooltip", "javascript", "es6", "es2015", "positioning", "placement"],
+  "license": "MIT",
+  "author" : "Robert Menke",
+  "repository" : "https://github.com/RobertMenke/Tooltip-js",
+  "bugs" : "https://github.com/RobertMenke/Tooltip-js/issues",
   "description": "This is a tooltip library designed to perfectly position tooltips inside of elements with relative or absolute positioning.",
   "devDependencies": {
     "babel": "^6.5.2",
