@@ -1,6 +1,6 @@
 {
   "name": "rm-tooltip",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "keywords": ["tooltip", "javascript", "es6", "es2015", "positioning", "placement"],
   "license": "MIT",
   "author" : "Robert Menke",
