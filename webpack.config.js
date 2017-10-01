@@ -1,46 +1,52 @@
-/**
- * Created by rbmenke on 1/19/17.
- */
-const webpack = require("webpack");
-const path = require("path");
+const webpack     = require( "webpack" )
+const path = require('path')
+const is_prod     = true
+const dev_plugins = [
+    new webpack.DefinePlugin( {
+        'process.env': {
+            NODE_ENV: JSON.stringify( 'development' )
+        }
+    } )
+]
+
+const prod_plugins = [
+    new webpack.DefinePlugin( {
+        'process.env': {
+            NODE_ENV: JSON.stringify( 'production' )
+        }
+    } ),
+    new webpack.optimize.UglifyJsPlugin( {
+        compress: {
+            warnings: false
+        }
+    } )
+]
 
 module.exports = {
-    entry : {
-        Tooltip     : './lib/js/Tooltip.js',
-        // autoplace   : './examples/js/autoplace/autoplace.js'
+    entry  : {
+        Tooltip: path.join(__dirname, 'lib/js/Tooltip.js'),
     },
-    // devtool : '#inline-source-map',
-    cache : true,
+    devtool: is_prod ? false : '#inline-source-map',
+    cache  : true,
     output : {
-        path        : './dist/',
-        // path        : './examples/js/main',
-        filename    : '[name].js',
-        libraryTarget : "umd"
+        path         : path.join(__dirname, 'dist/'),
+        filename     : '[name].js',
+        libraryTarget: "umd"
     },
     module : {
-        loaders : [
+        rules: [
             {
-                test : /\.js$/,
-                loader : "babel?presets[]=es2015"
-                // include : path.join(__dirname, 'lib')
-            },
-            {
-                test: /\.mustache$/,
-                // loader: 'mustache'
-                loader: 'mustache?minify'
-                // loader: 'mustache?{ minify: { removeComments: false } }'
-                // loader: 'mustache?noShortcut'
+                test   : /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use    : {
+                    loader : 'babel-loader',
+                    options: {
+                        presets: [ 'env' ],
+                        plugins: [ "transform-flow-strip-types", "transform-object-rest-spread" ]
+                    }
+                }
             }
         ]
     },
-    externals : {
-        "jquery" : "jquery"
-    },
-    plugins : [
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        })
-    ]
-};
+    plugins: is_prod ? prod_plugins : dev_plugins
+}

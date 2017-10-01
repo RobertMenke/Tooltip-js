@@ -3,7 +3,7 @@
 Many tooltip libraries in an effort to be simple assume static positioning and have no sense of the container they get
 appended to (often the document's body). 
 
-I wanted to build a tooltip class that could handle relative and absolute positioned
+I wanted to build a tooltip class that had NO DEPENDENCIES, could handle relative and absolute positioned
 containers, could scroll with its container, could be used as a general-purpose positioning mechanism, and was dead-simple
 to use.
 
@@ -13,14 +13,14 @@ If you like the way the library has been written, or find it useful in your own 
 Use:
 
 ```javascript
-const tooltip = new Tooltip(stick_to, container, jquery_tooltip);
+const tooltip = new Tooltip(stick_to, container, tooltip);
 ```
 
 The tooltip constructor accepts 3 arguments
 
 - ```@param {HTMLElement} stick_to```          - the element you want to append the tooltip to
 - ```@param {HTMLElement} container```         - the container the tooltip will get appended to. This is useful if you want your tooltip to scroll with the rest of the container
-- ```@param {jQuery}      jquery_tooltip```    - a jquery object with all of your tooltip content
+- ```@param {HTMLElement}      tooltip```    - an HTMLElement or HTML string that you would like to position as a tooltip
 
 #Basic Cases:
 
@@ -51,13 +51,12 @@ Be sure to checkout the examples folder and the lib/scss/Tooltip.scss for exampl
 
 The library provides a number of events that can be automatically applied to the tooltip.
 
-- ``.removeListener()`` - automatically remove the tooltip the next time any part of the document is clicked
 - ``setClickCallback(event, callback)`` - set a custom callback that happens after the tooltip has been applied the DOM. The callback is called with the parameters (/**Node|Element*/event.target, /**jQuery*/$tooltip).
-- ``.scrollWith($jquery_element)`` - tell the tooltip to scroll according the scrolling of a different html element. Typically you will not need this method, but certain tricky situations may make this method useful.
+- ``.scrollWith(html_element)`` - tell the tooltip to scroll according the scrolling of a different html element. Typically you will not need this method, but certain tricky situations may make this method useful.
 
 #Dependencies:
 
--jQuery (Will look into writing this in vanilla js in the future)
+- None :)
 
 #About
 
@@ -74,5 +73,4 @@ If you're not viewing this on github, here's a link! https://github.com/RobertMe
 
 - Add support for container (2nd param of constructor) position: fixed/static
 - Add additional CSS classes to accommodate wider use cases
-- Look into removing the reliance on jQuery
 - Add additional events and positioning methods
