@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
         el.addEventListener('mouseenter', () => {
             tooltip = new Tooltip(el, container, parseHtml(example({
                 message : determineMessage(el)
-            })))
+            })).firstElementChild)
             //10/10 offset to make the stick to the button
             determinePlacement(el, tooltip)
         })
